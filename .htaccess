@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^www.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+#RewriteRule /ios.php?courseId=1 /khoa-hoc-ios.html
+RewriteRule ^khoa-hoc-ios-swift.html /course.php?courseId=1
+RewriteRule ^khoa-hoc-angular-cli.html /course.php?courseId=2
+RewriteRule ^khoa-hoc-spring-hibernate.html /course.php?courseId=3
