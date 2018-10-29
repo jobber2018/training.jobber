@@ -36,7 +36,7 @@
     
     <style>
     .bg-dark {
-		background-color: #4285f4!important;
+		background-color: #188ac9!important;
 	}
     </style>
     </head>
@@ -90,6 +90,15 @@
 }
 .marketing {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.card-header h5 {
+    font-size: 1.1rem;
+}
+.accordion.md-accordion.accordion-5 .card .card-header {
+    background-color: #188ac9;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+transition: .3s;
 }
 </style>
 <main role="main">
