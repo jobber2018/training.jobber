@@ -15,10 +15,10 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Trang chủ </a>
         </li>
-        <li class="nav-item <?php if($_GET["mact"]=="ios-swift") echo "active"?>">
+        <li class="nav-item <?php if(@$_GET["mact"]=="ios-swift") echo "active"?>">
           <a class="nav-link" href="/khoa-hoc-ios-swift.html">Khóa học iOS Swift</a>
         </li>
-        <li class="nav-item <?php if($_GET["mact"]=="java") echo "active"?>">
+        <li class="nav-item <?php if(@$_GET["mact"]=="java") echo "active"?>">
           <a class="nav-link" href="/khoa-hoc-spring-hibernate.html">Khóa học java Spring - Hibernate</a>
         </li>
         <li class="nav-item">
