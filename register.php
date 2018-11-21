@@ -111,10 +111,10 @@ transition: .3s;
       	<div class="row">
         	<div class="col-md-4 mb-4"></div>
             <div class="col-md-4 mb-4" style="background: rgba(0, 139, 204, 0.43); padding-top: 20px;">
-            	<p><input id="name" name="name" class="contactname inp" style="width:100%" placeholder="Họ và Tên"></p>
-                <p><input id="email" name="email" class="contactemail inp" style="width:100%" placeholder="Email"></p>
-                <p><input id="phone" name="phone" class="contactphone inp" style="width:100%" placeholder="Phone"></p>
-                <p><button class="btn submitbtn" style="background: #008bcc;">Đăng ký</button></p>
+            	<p><input id="name" name="name" class="contactname inp" style="width:100%" placeholder="Họ và Tên" value="Hoang Manh Truong"></p>
+                <p><input id="email" name="email" class="contactemail inp" style="width:100%" placeholder="Email" value="truonghm1980@gmail.com"></p>
+                <p><input id="phone" name="phone" class="contactphone inp" style="width:100%" placeholder="Phone" value="0936408"></p>
+                <p><button class="btn submitbtn" style="background: #008bcc;" onClick="sendMail();">Đăng ký</button></p>
             </div>
             <div class="col-md-4 mb-4"></div>
         </div>
@@ -122,49 +122,58 @@ transition: .3s;
     </div>
   </section>
   </div>
-  <!-- Marketing messaging and featurettes
-      ================================================== --> 
-  <!-- Wrap the rest of the page in another container to center all the content. -->
-  <!--
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 mb-12 marketing" style="margin-top: 15px;padding-top: 15px;">
-        <form id="contactusform" name="contactusform" class="contactform" method="post" action="/mail.php" onSubmit="return sendMail()">
-            <div class="center"><span id="errormsg"></span></div>
-            <div class="relative">
-            <span class="inputlabel">Tên người yêu cầu</span>
-            <input id="name" name="name" class="contactname inp">
-            </div>
-            <div class="relative">
-            <span class="inputlabel">Email</span>
-            <input id="email" name="email" class="contactemail inp">
-            </div>
-            <div class="relative">
-            <span class="inputlabel">Phone</span>
-            <input id="phone" name="phone" class="contactphone inp">
-            </div>
-            <!--
-            <div class="relative">
-            <span class="inputlabel">Tiêu đề</span>
-            <input id="opensubject" class="inp">
-            </div>
-
-            <div class="relative">
-            <span class="inputlabel">Estimated Monthly Ad Spend: <strong>$</strong> <strong id="range-value"></strong></span>
-            <input id="range" class="range" type="range" min="10000" max="1000000" value="10000" step="1000"></input>
-            </div>
-            
-            <div class="relative">
-            <span class="inputlabel">Mô tả nhanh yêu cầu</span>
-            <textarea id="message" name="message" class="contactmessage"></textarea>
-            </div>
-            <div class="btncontainer center">
-            <button class="btn submitbtn">Gửi yêu cầu</button>
-            </div>
-            </form>
-      </div>
-    </div>
-  </div>
-  -->
-  <!-- /.container -->
+  <script type="text/javascript">
+  	function sendMail(){
+		var name = $("#name").val();
+		var email = $("#email").val();
+		var phone = $("#phone").val();
+		
+		if(name==""){
+			alert("Vui lòng nhập tên liên hệ!");
+			$("#name").focus();
+			return;
+		}else if(email=="" || !validateEmail(email)){
+			alert("Vui lòng nhập đúng định dạng email");
+			$("#email").focus();
+			return;
+		}else if(!validatePhone(phone)){
+			alert("Vui lòng nhập đúng điện thoại");
+			$("#phone").focus();
+			return;
+		}
+		var data = {
+			name:name,
+			email:email,
+			phone:phone
+		};
+		
+		console.log(data);
+		$.ajax({
+		  type: "POST",
+		  contentType:"application/json; charset=utf-8",
+		  dataType : 'json',
+		  url: "send-mail-dang-ky-khoa-hoc.html",
+		  data: JSON.stringify(data),
+		  success: function(result)
+           {
+			   if(result.success==true){ console.log(result.success);}
+			   else{console.log(result.message);} 
+           }
+		});
+	}
+	
+	function validateEmail($email) {
+	  var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+	  return emailReg.test( $email );
+	}
+	function validatePhone(phone) {
+		var filter = /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/;
+		if (filter.test(phone)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+  </script>
   <?php include("footer.php");?>

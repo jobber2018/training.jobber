@@ -1,4 +1,5 @@
 <?php
+
 // Multiple recipients
 $to = 'info@jobber.vn';
 
@@ -39,5 +40,13 @@ $headers[] = 'From: jobber.vn@gmail.com';
 //$headers[] = 'Bcc: birthdaycheck@example.com';
 
 // Mail it
-mail($to, $subject, $message, implode("\r\n", $headers));
+$msg="";
+try {
+    mail($to, $subject, $message, implode("\r\n", $headers));
+} catch (Exception $e) {
+    $msg= "err:".$e->getMessage();
+}
+
+$result =array("success"=>true,"message"=>$msg);
+echo json_encode ($result);
 ?>
